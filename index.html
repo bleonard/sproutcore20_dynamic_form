@@ -20,15 +20,17 @@
   <![endif]-->
 </head>
 <body>
+  <script type="text/x-handlebars" data-template-name="task-type-view">
+    {{target.name}}
+  </script>
+  
   <script type="text/x-handlebars">
     {{#view App.HeaderView}}
       {{typeName}}
     {{/view}}
   
-    {{#collection App.TaskTypesCollectionView}}
-      {{#view App.TaskTypeView targetBinding="content"}}
-        {{target.name}}
-      {{/view}}
+    {{#collection contentBinding="App.taskTypesController" tagName="ul"}}
+      {{view App.TaskTypeView targetBinding="content"}}
     {{/collection}}
   </script>
 

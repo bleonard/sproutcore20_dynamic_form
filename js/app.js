@@ -24,14 +24,9 @@ App.taskTypesController = SC.ArrayProxy.create({
   content: [App.TaskType.create({ name: "Shopping" }), App.TaskType.create({ name: "IKEA" })]
 });
 
-App.TaskTypesCollectionView = SC.CollectionView.extend({
-  contentBinding: 'App.taskTypesController',
-	tagName: 'ul'
-});
-
-
 App.TaskTypeView = SC.Button.extend({
-	action: "selectType"	// on the TaskType
+	action: "selectType",	// on the TaskType
+	templateName: "task-type-view"
 });
 
 App.HeaderView = SC.View.extend({

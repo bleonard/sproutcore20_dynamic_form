@@ -21,9 +21,13 @@
 </head>
 <body>
   <script type="text/x-handlebars">
+    {{#view App.HeaderView}}
+      {{typeName}}
+    {{/view}}
+  
     {{#collection App.TaskTypesCollectionView}}
-      {{#view App.TaskTypeView nameBinding="content.name"}}
-        {{name}}
+      {{#view App.TaskTypeView targetBinding="content"}}
+        {{target.name}}
       {{/view}}
     {{/collection}}
   </script>

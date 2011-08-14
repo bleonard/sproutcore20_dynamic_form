@@ -1,7 +1,22 @@
-var App = SC.Application.create();
+var App = SC.Application.create({
+	selectedTaskType: null,
+	
+	typeName: function() {
+    var type = this.get('selectedTaskType');
+    if (type != undefined) {
+      return type.name;
+    } else {
+      return "";
+    }
+  }.property('selectedTaskType').cacheable()
+});
 
 App.TaskType = SC.Object.extend({
-  name: null
+  name: null,
+
+	selectType: function() {
+		App.set('selectedTaskType', this)
+  }
 });
 
 App.taskTypesController = SC.ArrayProxy.create({
@@ -15,6 +30,10 @@ App.TaskTypesCollectionView = SC.CollectionView.extend({
 });
 
 
-App.TaskTypeView = SC.View.extend({
-	name: null
+App.TaskTypeView = SC.Button.extend({
+	action: "selectType"	// on the TaskType
+});
+
+App.HeaderView = SC.View.extend({
+  typeNameBinding: 'App.typeName'
 });

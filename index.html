@@ -32,6 +32,14 @@
     {{#collection contentBinding="App.taskTypesController" tagName="ul"}}
       {{view App.TaskTypeView targetBinding="content"}}
     {{/collection}}
+    
+    <br/><br/>
+    
+    {{#collection contentBinding="App.typeFieldsController" tagName="ul"}}
+      {{#view App.TaskFieldView fieldBinding="content"}}
+        {{field.label}}
+      {{/view}}
+    {{/collection}}
   </script>
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>

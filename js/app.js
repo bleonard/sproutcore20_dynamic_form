@@ -60,6 +60,15 @@ App.taskTypesController = SC.ArrayProxy.create({
 	]
 });
 
+App.commonFieldsController = SC.ArrayProxy.create({
+	content: [
+		App.TaskField.create({ label: "Common1" }),
+		App.TaskField.create({ label: "Common2" }),
+		App.TaskField.create({ label: "Common3" })
+	]
+});
+
+
 App.TaskTypeView = SC.Button.extend({
 	action: "selectType",	// on the TaskType
 	templateName: "task-type-view"

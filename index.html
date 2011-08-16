@@ -24,16 +24,24 @@
     {{target.name}}
   </script>
   
-  <script type="text/x-handlebars">
-    {{#view App.HeaderView}}
-      {{typeName}}
-    {{/view}}
-  
+  <script type="text/x-handlebars">  
     {{#collection contentBinding="App.taskTypesController" tagName="ul"}}
       {{view App.TaskTypeView targetBinding="content"}}
     {{/collection}}
     
     <br/><br/>
+    
+    {{#collection contentBinding="App.commonFieldsController" tagName="ul"}}
+      {{#view App.TaskFieldView fieldBinding="content"}}
+        {{field.label}}
+      {{/view}}
+    {{/collection}}
+    
+    <br/><br/>
+    
+    {{#view App.HeaderView}}
+      {{typeName}}
+    {{/view}}
     
     {{#collection contentBinding="App.typeFieldsController" tagName="ul"}}
       {{#view App.TaskFieldView fieldBinding="content"}}

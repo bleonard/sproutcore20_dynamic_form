@@ -39,15 +39,14 @@
     
     <br/><br/>
     
-    {{#view App.HeaderView}}
-      {{typeName}}
+    {{#view App.SelectedTypeView}}
+      <p>{{type.name}}</p>
+      {{#collection contentBinding="fieldsController" tagName="ul"}}
+        {{#view App.TaskFieldView fieldBinding="content"}}
+          {{field.label}}
+        {{/view}}
+      {{/collection}}
     {{/view}}
-    
-    {{#collection contentBinding="App.typeFieldsController" tagName="ul"}}
-      {{#view App.TaskFieldView fieldBinding="content"}}
-        {{field.label}}
-      {{/view}}
-    {{/collection}}
   </script>
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>

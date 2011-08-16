@@ -1,23 +1,5 @@
 var App = SC.Application.create({
 	selectedTaskType: null,
-	
-	typeName: function() {
-    var type = this.get('selectedTaskType');
-    if (type != undefined) {
-      return type.name;
-    } else {
-      return "";
-    }
-  }.property('selectedTaskType').cacheable(),
-
-	typeFieldsController: function() {
-    var type = this.get('selectedTaskType');
-    if (type != undefined) {
-			return type.controller();
-    } else {
-      return null;
-    }
-  }.property('selectedTaskType').cacheable()
 });
 
 App.TaskField = SC.Object.extend({
@@ -68,19 +50,23 @@ App.commonFieldsController = SC.ArrayProxy.create({
 	]
 });
 
-
 App.TaskTypeView = SC.Button.extend({
 	action: "selectType",	// on the TaskType
 	templateName: "task-type-view"
 });
-
-App.HeaderView = SC.View.extend({
-  typeNameBinding: 'App.typeName'
-});
-
 
 App.TaskFieldView = SC.View.extend({
 	classNames: ['tr-task-field'],
 	tagName: "div",
 	field: null
 });
+
+App.SelectedTypeView = SC.View.extend({
+  typeBinding: 'App.selectedTaskType',
+
+	fieldsController: function() {
+		var type = this.get('type');
+		return type ? type.controller() : null;
+  }.property('type').cacheable()
+});
+

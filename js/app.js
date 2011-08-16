@@ -13,7 +13,7 @@ var App = SC.Application.create({
 	typeFieldsController: function() {
     var type = this.get('selectedTaskType');
     if (type != undefined) {
-			return type.controller;
+			return type.controller();
     } else {
       return null;
     }
@@ -26,10 +26,14 @@ App.TaskField = SC.Object.extend({
 
 App.TaskType = SC.Object.extend({
   name: null,
-	controller: SC.ArrayProxy.create({
-	  content: [App.TaskField.create({ label: "One" }), App.TaskField.create({ label: "Two" })]
-	}),
-
+	fields: [],
+	
+	controller: function() {
+		fieldsController = SC.ArrayProxy.create();
+		fieldsController.content = this.fields;
+		return fieldsController;
+	},
+	
 	selectType: function() {
 		App.set('selectedTaskType', this)
   }
@@ -37,7 +41,23 @@ App.TaskType = SC.Object.extend({
 
 App.taskTypesController = SC.ArrayProxy.create({
   // Initialize the array controller with the types
-  content: [App.TaskType.create({ name: "Shopping" }), App.TaskType.create({ name: "IKEA" })]
+  content: [
+		
+		App.TaskType.create({ name: "Shopping",
+			fields: [
+								App.TaskField.create({ label: "One" }), 
+								App.TaskField.create({ label: "Two" })
+							] 
+		}), 
+
+		App.TaskType.create({ name: "IKEA",
+			fields: [
+								App.TaskField.create({ label: "Three" }), 
+								App.TaskField.create({ label: "Four" })
+							] 
+		})
+	
+	]
 });
 
 App.TaskTypeView = SC.Button.extend({

@@ -3,7 +3,9 @@ var App = SC.Application.create({
 });
 
 App.TaskField = SC.Object.extend({
-	label: null
+	label: null,
+	templateName: 'task-field-label',
+	tagName: 'p'
 });
 
 App.TaskType = SC.Object.extend({
@@ -57,8 +59,20 @@ App.TaskTypeView = SC.Button.extend({
 
 App.TaskFieldView = SC.View.extend({
 	classNames: ['tr-task-field'],
-	tagName: "div",
-	field: null
+	field: null,
+	
+	fieldDelegate: function(prop) {
+		var field = this.get('field');
+		return field ? field.get(prop) : null;
+	},
+	
+	templateName: function() {
+		return this.fieldDelegate('templateName');
+  }.property('field').cacheable(),
+
+	tagName: function() {
+		return this.fieldDelegate('tagName');
+  }.property('field').cacheable()
 });
 
 App.SelectedTypeView = SC.View.extend({

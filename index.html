@@ -24,6 +24,10 @@
     {{target.name}}
   </script>
   
+  <script type="text/x-handlebars" data-template-name="task-field-label">
+    {{field.label}}
+  </script>
+  
   <script type="text/x-handlebars">  
     {{#collection contentBinding="App.taskTypesController" tagName="ul"}}
       {{view App.TaskTypeView targetBinding="content"}}
@@ -32,9 +36,7 @@
     <br/><br/>
     
     {{#collection contentBinding="App.commonFieldsController" tagName="ul"}}
-      {{#view App.TaskFieldView fieldBinding="content"}}
-        {{field.label}}
-      {{/view}}
+      {{view App.TaskFieldView fieldBinding="content"}}
     {{/collection}}
     
     <br/><br/>
@@ -42,9 +44,7 @@
     {{#view App.SelectedTypeView}}
       <p>{{type.name}}</p>
       {{#collection contentBinding="fieldsController" tagName="ul"}}
-        {{#view App.TaskFieldView fieldBinding="content"}}
-          {{field.label}}
-        {{/view}}
+        {{view App.TaskFieldView fieldBinding="content"}}
       {{/collection}}
     {{/view}}
   </script>

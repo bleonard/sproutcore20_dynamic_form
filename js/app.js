@@ -4,8 +4,21 @@ var App = SC.Application.create({
 
 App.TaskField = SC.Object.extend({
 	label: null,
-	templateName: 'task-field-label',
-	tagName: 'p'
+	tagName: 'div',
+	type: null,
+	
+	templateName: function() {
+		switch (this.get('type')) {
+			case "TaskStringField":
+				return 'task-string-field';
+			case "TaskTextField":
+				return 'task-text-field';
+			case "TaskBooleanField":
+				return 'task-boolean-field';
+			default:
+				return 'task-field-label';
+		}
+	}.property('type').cacheable()
 });
 
 App.TaskType = SC.Object.extend({
@@ -29,15 +42,15 @@ App.taskTypesController = SC.ArrayProxy.create({
 		
 		App.TaskType.create({ name: "Shopping",
 			fields: [
-								App.TaskField.create({ label: "One" }), 
-								App.TaskField.create({ label: "Two" })
+								App.TaskField.create({ label: "One", type: "TaskStringField" }), 
+								App.TaskField.create({ label: "Two", type: "TaskBooleanField" })
 							] 
 		}), 
 
 		App.TaskType.create({ name: "IKEA",
 			fields: [
 								App.TaskField.create({ label: "Three" }), 
-								App.TaskField.create({ label: "Four" })
+								App.TaskField.create({ label: "Four", type: "TaskTextField" })
 							] 
 		})
 	

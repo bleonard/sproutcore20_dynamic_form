@@ -27,6 +27,17 @@
   <script type="text/x-handlebars" data-template-name="task-field-label">
     {{field.label}}
   </script>
+  <script type="text/x-handlebars" data-template-name="task-string-field">
+    {{field.label}}
+    {{view SC.TextField}}
+  </script>
+  <script type="text/x-handlebars" data-template-name="task-boolean-field">
+    {{view SC.Checkbox titleBinding="field.label"}}
+  </script>
+  <script type="text/x-handlebars" data-template-name="task-text-field">
+    {{field.label}}
+    {{view SC.TextArea}}
+  </script>
   
   <script type="text/x-handlebars">  
     {{#collection contentBinding="App.taskTypesController" tagName="ul"}}

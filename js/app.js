@@ -1,8 +1,11 @@
 var App = SC.Application.create({
-	selectedTaskType: null,
+	task: SC.Object.create({
+		type: null
+	})
 });
 
 App.TaskField = SC.Object.extend({
+	id: null,
 	label: null,
 	tagName: 'div',
 	type: null,
@@ -32,7 +35,7 @@ App.TaskType = SC.Object.extend({
 	},
 	
 	selectType: function() {
-		App.set('selectedTaskType', this)
+		App.task.set('type', this)
   }
 });
 
@@ -42,15 +45,15 @@ App.taskTypesController = SC.ArrayProxy.create({
 		
 		App.TaskType.create({ name: "Shopping",
 			fields: [
-								App.TaskField.create({ label: "One", type: "TaskStringField" }), 
-								App.TaskField.create({ label: "Two", type: "TaskBooleanField" })
+								App.TaskField.create({ id: 4, label: "One", type: "TaskStringField" }), 
+								App.TaskField.create({ id: 5, label: "Two", type: "TaskBooleanField" })
 							] 
 		}), 
 
 		App.TaskType.create({ name: "IKEA",
 			fields: [
-								App.TaskField.create({ label: "Three" }), 
-								App.TaskField.create({ label: "Four", type: "TaskTextField" })
+								App.TaskField.create({ id: 6, label: "Three" }), 
+								App.TaskField.create({ id: 7, label: "Four", type: "TaskTextField" })
 							] 
 		})
 	
@@ -59,9 +62,9 @@ App.taskTypesController = SC.ArrayProxy.create({
 
 App.commonFieldsController = SC.ArrayProxy.create({
 	content: [
-		App.TaskField.create({ label: "Common1" }),
-		App.TaskField.create({ label: "Common2" }),
-		App.TaskField.create({ label: "Common3" })
+		App.TaskField.create({ id: 1, label: "Common1" }),
+		App.TaskField.create({ id: 2, label: "Common2" }),
+		App.TaskField.create({ id: 3, label: "Common3" })
 	]
 });
 
@@ -89,7 +92,7 @@ App.TaskFieldView = SC.View.extend({
 });
 
 App.SelectedTypeView = SC.View.extend({
-  typeBinding: 'App.selectedTaskType',
+  typeBinding: 'App.task.type',
 
 	fieldsController: function() {
 		var type = this.get('type');
